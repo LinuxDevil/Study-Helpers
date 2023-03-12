@@ -38,6 +38,25 @@ Options:
 1. --play
 2. --stop
 
+## Transcript Script
+
+The `generate_transcript.py` script is a Python script that uses the SpeechRecognition module to generate a transcript from a video. It supports various video formats and uses the Google Speech Recognition API to recognize the speech in the audio.
+
+### Usage
+
+To use the `generate_transcript.py` script, you can run it like this:
+
+`python generate_transcript.py path/to/video.mp4`
+
+This command will generate a transcript from the audio in the video file at the specified path and print the transcript to the console. You can also specify the path to save the transcript file using the `--output` argument, like this:
+
+`python generate_transcript.py path/to/video.mp4 --output path/to/transcript.txt`
+
+This command will generate the transcript and save it to the specified file path.
+
+### Files
+
+-   `generate_transcript.py`: The Python script that generates a transcript from a video file.
 
 ## Aliases Script
 
