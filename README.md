@@ -15,6 +15,7 @@ bashCopy code
 
 `./pomodoro.sh` 
 
+
 This will start a Pomodoro timer with 4 cycles and play the `crowd.mp3` sound file at the end of each cycle and break. You can adjust the number of cycles and the end timer sound file by editing the `pomodoro.sh` script or by passing command-line arguments to the `pomodoro.py` script directly.
 
 ### Files
@@ -22,6 +23,21 @@ This will start a Pomodoro timer with 4 cycles and play the `crowd.mp3` sound fi
 -   `pomodoro.py`: The Python script that implements the Pomodoro timer logic.
 -   `pomodoro.sh`: A Bash script that runs the `pomodoro.py` script with default options.
 -   `sounds/`: A directory containing sound files that can be played at the end of each Pomodoro cycle and break.
+
+## Lofi Script
+
+The Lofi script is a Python script that will play the Lofi music for you in the background!
+
+### Usage
+
+To use the `lofi-music.py` script, you can run it like this:
+
+`python study_music.py --option`
+
+Options: 
+1. --play
+2. --stop
+
 
 ## Aliases Script
 
