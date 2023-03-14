@@ -11,8 +11,6 @@ The `pomodoro` script is a Python script that implements the Pomodoro Technique,
 
 To use the `pomodoro` script, you can run the `pomodoro.sh` Bash script provided in the repository:
 
-bashCopy code
-
 `./pomodoro.sh` 
 
 
@@ -37,6 +35,41 @@ To use the `lofi-music.py` script, you can run it like this:
 Options: 
 1. --play
 2. --stop
+
+
+## OpenAI Question Answering CLI
+
+This is a command-line interface (CLI) written in Python that uses the OpenAI API to generate answers to technical and code-related questions. The CLI takes a prompt text as input, along with optional arguments for the OpenAI model to use and the temperature to use for generating the answer.
+
+### Installation
+
+To use the OpenAI Question Answering CLI, you'll need to have Python 3 installed on your machine, along with the OpenAI Python module. You can install the OpenAI module using pip:
+
+`pip install openai` 
+
+Once you have Python and the OpenAI module installed, you can download the `openai_qa.py` script from this repository and save it to your computer.
+
+### Usage
+
+To use the OpenAI Question Answering CLI, simply run the `openai_qa.py` script from the command line, passing in the prompt text as a required argument:
+
+`python openai_qa.py "What is a Python decorator and how does it work?"` 
+
+This will generate an answer to the specified question using the `text-davinci-002` model and a temperature of 0.5, and print the answer to the console.
+
+You can also specify the OpenAI model to use and the temperature by passing in optional arguments:
+
+`python openai_qa.py "What is a Python decorator and how does it work?" --model text-curie-001 --temperature 0.3` 
+
+This will generate an answer to the specified question using the `text-curie-001` model and a temperature of 0.3, and print the answer to the console.
+
+#### Command-Line Options
+
+The following command-line options are available for the OpenAI Question Answering CLI:
+
+-   `prompt_text` (required): The prompt text for the question to generate an answer for.
+-   `--model` (optional): The name of the OpenAI API model to use (default: text-davinci-002).
+-   `--temperature` (optional): The temperature to use for generating the answer (default: 0.5).
 
 ## Transcript Script
 
@@ -65,8 +98,6 @@ The `aliases.sh` script is a Bash script that defines a set of useful aliases fo
 ### Usage
 
 To use the `aliases.sh` script, you can run it in your Bash terminal:
-
-bashCopy code
 
 `source aliases.sh` 
 
