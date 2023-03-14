@@ -2,12 +2,10 @@ import argparse
 import webbrowser
 from random import choice
 
-# LOFI_MUSIC_URL = 'https://www.youtube.com/watch?v=5qap5aO4i9A'
-LOFI_MUSIC_URLS: list[str] = ['https://www.youtube.com/watch?v=jfKfPfyJRdk',
-                   "https://www.youtube.com/watch?v=GqnYz3Ty3Qc",
-                   "https://www.youtube.com/watch?v=mxH_9dlUntU",
-                   "https://www.youtube.com/watch?v=KJFWkgrwxJQ"
-                   ]
+LOFI_MUSIC_URLS: list[str] = [ "https://www.youtube.com/watch?v=jfKfPfyJRdk",
+                               "https://www.youtube.com/watch?v=GqnYz3Ty3Qc",
+                               "https://www.youtube.com/watch?v=mxH_9dlUntU",
+                               "https://www.youtube.com/watch?v=KJFWkgrwxJQ"]
 
 
 def main():
