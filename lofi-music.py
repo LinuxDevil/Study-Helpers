@@ -1,7 +1,9 @@
 import argparse
 import webbrowser
 
-LOFI_MUSIC_URL = 'https://www.youtube.com/watch?v=5qap5aO4i9A'
+# LOFI_MUSIC_URL = 'https://www.youtube.com/watch?v=5qap5aO4i9A'
+LOFI_MUSIC_URL = 'https://www.youtube.com/watch?v=jfKfPfyJRdk'
+
 
 def main():
     parser = argparse.ArgumentParser(description='Play Lofi Music')
