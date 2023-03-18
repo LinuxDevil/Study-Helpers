@@ -1,60 +1,60 @@
+import subprocess
+import json
 import argparse
-import requests
-from bs4 import BeautifulSoup
-from lighthouse import lighthouse
+import datetime
 
-class Test:
-    def __init__(self, url):
-        self.url = url
-    
-    def run(self):
-        self._run_seo_tests()
-        self._run_performance_tests()
-        self._run_best_practices_tests()
-        self._run_accessibility_tests()
 
-    def _run_seo_tests(self):
-        response = requests.get(self.url)
-        html = response.text
+def get_cli_flags(args) -> [str]:
+    cli_flags = []
+    if args.performance:
+        cli_flags.append('--only-categories=performance')
+    if args.accessibility:
+        cli_flags.append('--only-categories=accessibility')
+    if args.best_practices:
+        cli_flags.append('--only-categories=best-practices')
+    if args.seo:
+        cli_flags.append('--only-categories=seo')
+    return cli_flags
 
-        soup = BeautifulSoup(html, 'html.parser')
 
-        title = soup.title.text
-        if len(title) < 50:
-            print('Title tag is too short: {}'.format(title))
+def get_cli_args():
+    parser = argparse.ArgumentParser(description='Run Google Lighthouse as a CLI')
+    parser.add_argument('url', help='URL to run Lighthouse audit on')
+    parser.add_argument('-p', '--performance', action='store_true', help='Include performance audit')
+    parser.add_argument('-a', '--accessibility', action='store_true', help='Include accessibility audit')
+    parser.add_argument('-b', '--best-practices', action='store_true', help='Include best practices audit')
+    parser.add_argument('-s', '--seo', action='store_true', help='Include SEO audit')
+    return parser.parse_args()
 
-        meta_desc = soup.find('meta', attrs={'name': 'description'})
-        if not meta_desc or len(meta_desc.get('content', '')) < 120:
-            print('Meta description is too short or missing')
 
-        h1_tags = soup.find_all('h1')
-        if len(h1_tags) == 0:
-            print('No H1 tags found')
+def run_lighthouse(url, flags):
+    """Runs Lighthouse audit on the given URL with the given flags"""
+    lighthouse_command = f'lighthouse {url} --output=json --quiet {" ".join(flags)}'
+    process = subprocess.Popen(lighthouse_command, stdout=subprocess.PIPE, shell=True)
+    output, error = process.communicate()
+    if error:
+        raise Exception(error)
+    return json.loads(output)
 
-        img_tags = soup.find_all('img')
-        if len(img_tags) == 0:
-            print('No images found')
 
-    def _run_performance_tests(self):
-        results = lighthouse(self.url, config_path={'extends': 'lighthouse:default', 'settings': {'emulatedFormFactor': 'desktop'}},
-                              flags={'onlyCategories': ['performance']})
-        print('Performance score:', results['categories']['performance']['score'])
+def save_report(args, result):
+    now = datetime.datetime.now()
+    timestamp = now.strftime('%Y-%m-%d')
+    website_name = args.url.split('//')[1].split('/')[0]
 
-    def _run_best_practices_tests(self):
-        results = lighthouse(self.url, config_path={'extends': 'lighthouse:default', 'settings': {'emulatedFormFactor': 'desktop'}},
-                              flags={'onlyCategories': ['best-practices']})
-        print('Best practices score:', results['categories']['best-practices']['score'])
+    report_name = f'{website_name}-{timestamp}.json'
+    with open(report_name, 'w') as f:
+        f.write(json.dumps(result, indent=4))
 
-    def _run_accessibility_tests(self):
-        results = lighthouse(self.url, config_path={'extends': 'lighthouse:default', 'settings': {'emulatedFormFactor': 'desktop'}},
-                              flags={'onlyCategories': ['accessibility']})
-        print('Accessibility score:', results['categories']['accessibility']['score'])
+    print(f'Lighthouse report saved as {report_name}')
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='Run SEO, performance, best practices, and accessibility tests on a website.')
-    parser.add_argument('url', help='URL of website to test')
-    args = parser.parse_args()
+    _args = get_cli_args()
+    _flags = get_cli_flags(_args)
 
-    test = Test(args.url)
-    test.run()
+    # Run Lighthouse audit and save the report
+    _result = run_lighthouse(_args.url, _flags)
+    print('Light house finished! Saving Report...')
+    save_report(_args, _result)
+

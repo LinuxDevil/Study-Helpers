@@ -38,13 +38,19 @@ Options:
 
 ## Site Lighthouse
 
-This is a Python script that runs SEO, performance, best practices, and accessibility tests on a website. It uses the `requests`, `beautifulsoup4`, and `lighthouse` modules to perform these tests.
+This is a Python script that runs SEO, performance, best practices, and accessibility tests on a website. It uses the `lighthouse cli` to perform these tests.
 
 ### Usage
 
+Install the lighthouse CLI
+
+`npm install -g lighthouse`
+
+Install [Chrome Browser](https://www.google.com/chrome/)
+
 To run the tests, use the following command:
 
-`python site-lighthouse.py <website-url>` 
+`python site-lighthouse.py <website-url> -p` 
 
 Replace `<website-url>` with the URL of the website you want to test.
 
